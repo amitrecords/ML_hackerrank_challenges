@@ -1,0 +1,33 @@
+# Finding the longest substring with a given number of unique characters
+#substring S and the number of unique characters K is given
+def check(sub):
+	unq={}
+	ctr=0
+	for i in sub:
+		if i not in unq.values():
+			unq[ctr]=i
+			ctr+=1
+	return len(unq.values())
+			
+def findlongest(s,K):
+	hi=len(s)-1
+	lw=0
+	mx=0
+	while(hi!=lw and (hi-lw)>0):
+		sub=s[lw:hi+1]
+		ks=check(sub)
+		l=len(sub)
+		if ks==K and l>mx:
+			mx=l
+			ans=sub
+		hi-=1
+		if hi==lw+1 and lw != len(s)-2:
+			hi=len(s)-1
+			lw+=1
+	return ans
+			
+		
+s=input().strip()
+K=int(input())
+sub=findlongest(s,K)
+print(sub)
